@@ -20,13 +20,13 @@ import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home),
-    path('post_detail/', views.post_detail),
-    path('register/', views.users_register),
-    path('login/', views.users_login),
-    path('post_form/', views.post_form),
-    path('favorite_list', views.favorite_list),
+    # path('', views.home),
+    # path('post_detail/', views.post_detail),
+    # path('register/', views.users_register),
+    # path('login/', views.users_login),
+    # path('post_form/', views.post_form),
+    # path('favorite_list', views.favorite_list),
 
     path('accounts/', include("users.urls")),
-    path('posts/', include("posts.urls"))
+    path('', include("posts.urls"))
 ]
