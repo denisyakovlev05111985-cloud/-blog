@@ -1,3 +1,45 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from django.urls import reverse
 
-# Create your models here.
+
+User = get_user_model()
+
+class Post(models.Model):
+    title= models.CharField("Заголовок", max_length=200)
+    text= models.TextField("Текс")
+    autor= models.ForeignKey(
+        User,
+        verbose_name="Аватар",
+        on_delete=models.CASCADE,
+        related_name="posts"
+    )
+    favorites= models.ManyToManyField(User, verbose_name="В избранном у пользователя",related_name="favorite_posts")
+    created_at= models.DateField("Дата создания", auto_now_add=True)
+    updated_at= models.DateField("Дата обновления", auto_now_add=True)
+
+
+    class Meta:
+       ordering= ["-created_at"]
+       verbose_name= "пост"
+       verbose_name_plural= "посты"
+
+    def __str__(self):
+        return self.title
+    
+    def get_absolut_url(self):
+        return reverse("post_detail", kwargs= {"pk": self.pk})
+    
+class Comment(models.Model):
+    post= models.ForeignKey(Post, verbose_name="Пост",on_delete=models.CASCADE,related_name="comments")
+    author= models.ForeignKey(User, verbose_name="Автор",on_delete=models.CASCADE,related_name="comments")
+    text= models.TextField("Текст комментария")
+    created_at= models.DateTimeField("Дата создания", auto_now_add=True)
+
+    class Meta:
+        ordering= ["-created_at"]
+        verbose_name= "Комментарий"
+        verbose_name_plural= "Комментарий"
+
+    def __str__(self):
+        return f"Комментарий от {self.author} к {self.post}"
