@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список постов</title>
+</head>
+<body>
+    <h1>Все посты</h1>
+
+    {% if object_list %}
+        <ul>
+            {% for post in object_list %}
+                <li>
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.content|truncatewords:30 }}</p>
+                    <!-- Если есть поле created_at, раскомментируй строку ниже -->
+                    {# <small>{{ post.created_at }}</small> #}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Постов пока нет.</p>
+    {% endif %}
+</body>
+</html>
