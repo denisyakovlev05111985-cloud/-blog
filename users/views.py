@@ -39,6 +39,7 @@ class LoginView(View):
         return redirect("/")
     
 class RegisterView(View):
+    template_name= "users/register.html"
     def get(self, request):
         return render(
             request,

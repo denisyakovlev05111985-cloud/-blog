@@ -31,7 +31,7 @@ class FavoritePostListView(LoginRequiredMixin, ListView):
     paginate_by= 10
 
     def get_queryset(self):
-        return self.request.user.favorite_posts.aii()
+        return self.request.user.favorite_posts.all()
     
 class PostDetalView(DeleteView):
     model= Post
