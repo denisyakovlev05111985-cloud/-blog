@@ -8,7 +8,7 @@ User = get_user_model()
 class Post(models.Model):
     title= models.CharField("Заголовок", max_length=200)
     text= models.TextField("Текс")
-    autor= models.ForeignKey(
+    author= models.ForeignKey(
         User,
         verbose_name="Аватар",
         on_delete=models.CASCADE,
@@ -27,7 +27,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-    def get_absolut_url(self):
+    def get_absolute_url(self):
         return reverse("post_detail", kwargs= {"pk": self.pk})
     
 class Comment(models.Model):
