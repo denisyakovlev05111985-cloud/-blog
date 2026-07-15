@@ -33,7 +33,7 @@ class FavoritePostListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return self.request.user.favorite_posts.all()
     
-class PostDetailView(DeleteView):
+class PostDetailView(DetailView):
     model= Post
     template_name= "posts/post_detail.html"
 
@@ -94,7 +94,7 @@ class AuthorRequiredMixin(UserPassesTestMixin):
             self.object= get_object_or_404(Post, pk=self.kwargs["pk"])
         return self.object
     
-    def tesst_func(self):
+    def test_func(self):
         obj= self.get_object()
         return obj.author == self.request.user
     
